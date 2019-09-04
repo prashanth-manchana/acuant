@@ -1,11 +1,11 @@
-package com.vineeth.acuant.to;
+package com.nec.acuant.to;
 
 public class ScanData {
 	private int authenticationSensitivity;
 	private int classificationMode;
 	private Device device;
-	private String imageCroppingExpectedSize;
-	private String imageCroppingMode;
+	private int imageCroppingExpectedSize;
+	private int imageCroppingMode;
 	private String manualDocumentType;
 	private int processMode;
 	private String subscriptionId;
@@ -34,19 +34,19 @@ public class ScanData {
 		this.device = device;
 	}
 
-	public String getImageCroppingExpectedSize() {
+	public int getImageCroppingExpectedSize() {
 		return imageCroppingExpectedSize;
 	}
 
-	public void setImageCroppingExpectedSize(String imageCroppingExpectedSize) {
+	public void setImageCroppingExpectedSize(int imageCroppingExpectedSize) {
 		this.imageCroppingExpectedSize = imageCroppingExpectedSize;
 	}
 
-	public String getImageCroppingMode() {
+	public int getImageCroppingMode() {
 		return imageCroppingMode;
 	}
 
-	public void setImageCroppingMode(String imageCroppingMode) {
+	public void setImageCroppingMode(int imageCroppingMode) {
 		this.imageCroppingMode = imageCroppingMode;
 	}
 

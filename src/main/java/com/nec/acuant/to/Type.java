@@ -1,9 +1,9 @@
-package com.vineeth.acuant.to;
+package com.nec.acuant.to;
 
 public class Type {
 	private String manufacturer;
 	private String model;
-	private String sensorType;
+	private int sensorType;
 
 	public String getManufacturer() {
 		return manufacturer;
@@ -21,11 +21,11 @@ public class Type {
 		this.model = model;
 	}
 
-	public String getSensorType() {
+	public int getSensorType() {
 		return sensorType;
 	}
 
-	public void setSensorType(String sensorType) {
+	public void setSensorType(int sensorType) {
 		this.sensorType = sensorType;
 	}
 

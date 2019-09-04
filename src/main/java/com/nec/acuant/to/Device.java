@@ -1,4 +1,4 @@
-package com.vineeth.acuant.to;
+package com.nec.acuant.to;
 
 public class Device {
 	private boolean hasContactlessChipReader;
