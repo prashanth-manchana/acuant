@@ -4,5 +4,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface InstanceService {
-	public int getInstanceId(String authToken);
+	public String getInstanceId(String authToken);
 }

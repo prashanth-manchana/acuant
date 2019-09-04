@@ -21,8 +21,7 @@ public class AssureIdConnectController {
 			@RequestBody MultipartFile frontImage, @RequestBody MultipartFile backImage,
 			@RequestBody(required = false) String imageData) {
 		System.out.println(imageData);
-		int instanceId = assureIdHelper.publishDocument(authToken, frontImage, backImage);
-
+		String instanceId = assureIdHelper.publishDocument(authToken, frontImage, backImage);
 	}
 
 }

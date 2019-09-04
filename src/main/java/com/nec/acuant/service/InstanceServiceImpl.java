@@ -21,16 +21,15 @@ public class InstanceServiceImpl implements InstanceService {
 	private String subscriptionId;
 
 	@Override
-	public int getInstanceId(String authToken) {
+	public String getInstanceId(String authToken) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("Authorization", authToken);
-		populateData();
-		HttpEntity<String> entity = new HttpEntity<String>(headers);
+		HttpEntity<ScanData> entity = new HttpEntity<ScanData>(populateData(), headers);
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<Integer> response = restTemplate.exchange(
-				URLConstants.BASE_URL + URLConstants.GET_DOCUMENT_INSTANCE, HttpMethod.POST, entity, Integer.class);
+		ResponseEntity<String> response = restTemplate.exchange(
+				URLConstants.BASE_URL + URLConstants.GET_DOCUMENT_INSTANCE, HttpMethod.POST, entity, String.class);
 		return response.getBody();
 	}
 
