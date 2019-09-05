@@ -6,11 +6,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.nec.acuant.constants.URLConstants;
 import com.nec.acuant.to.MetricsResponse;
 
+@Service
 public class MetricsServiceImpl implements MetricsService {
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 

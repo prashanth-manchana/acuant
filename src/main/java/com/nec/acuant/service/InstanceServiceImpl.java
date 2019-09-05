@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
@@ -18,6 +19,7 @@ import com.nec.acuant.to.Device;
 import com.nec.acuant.to.ScanData;
 import com.nec.acuant.to.Type;
 
+@Service
 public class InstanceServiceImpl implements InstanceService {
 
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());

@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.nec.acuant.service.ClassificationServiceImpl;
-import com.nec.acuant.service.InstanceServiceImpl;
-import com.nec.acuant.service.MetricsServiceImpl;
-import com.nec.acuant.service.UploadImageServiceImpl;
+import com.nec.acuant.service.ClassificationService;
+import com.nec.acuant.service.InstanceService;
+import com.nec.acuant.service.MetricsService;
+import com.nec.acuant.service.UploadImageService;
 import com.nec.acuant.to.ClassificationResponse;
 import com.nec.acuant.to.MetricsResponse;
 
@@ -19,30 +19,30 @@ public class AssureIdConnectControllerHelper {
 	private String subscriptionId;
 
 	@Autowired
-	InstanceServiceImpl instanceServiceImpl;
+	InstanceService instanceService;
 
 	@Autowired
-	UploadImageServiceImpl imageServiceImpl;
+	UploadImageService imageService;
 
 	@Autowired
-	MetricsServiceImpl metricsServiceImpl;
+	MetricsService metricsService;
 
 	@Autowired
-	ClassificationServiceImpl classificationServiceImpl;
+	ClassificationService classificationService;
 
 	public String publishDocument(String authToken, MultipartFile frontImage, MultipartFile backImage) {
-		String instanceId = instanceServiceImpl.getInstanceId(authToken);
-		imageServiceImpl.uploadImage(instanceId, authToken, frontImage, 0, 0);
-		MetricsResponse frontMetricsResponse = metricsServiceImpl.getImageMetrics(instanceId, authToken, 0, 0);
+		String instanceId = instanceService.getInstanceId(authToken);
+		imageService.uploadImage(instanceId, authToken, frontImage, 0, 0);
+		MetricsResponse frontMetricsResponse = metricsService.getImageMetrics(instanceId, authToken, 0, 0);
 		if (frontMetricsResponse.getGlareMetric() < 50 && frontMetricsResponse.getSharpnessMetric() < 50) {
-			imageServiceImpl.uploadReplacementImage(instanceId, authToken, frontImage, 0, 0);
+			imageService.uploadReplacementImage(instanceId, authToken, frontImage, 0, 0);
 		}
-		ClassificationResponse clResponse = classificationServiceImpl.getClassificationData(instanceId, authToken);
+		ClassificationResponse clResponse = classificationService.getClassificationData(instanceId, authToken);
 		if (clResponse.getTypeData().getSupportedImages().size() > 0) {
-			imageServiceImpl.uploadImage(instanceId, authToken, frontImage, 1, 0);
-			MetricsResponse backMetricsResponse = metricsServiceImpl.getImageMetrics(instanceId, authToken, 0, 0);
+			imageService.uploadImage(instanceId, authToken, frontImage, 1, 0);
+			MetricsResponse backMetricsResponse = metricsService.getImageMetrics(instanceId, authToken, 0, 0);
 			if (backMetricsResponse.getGlareMetric() < 50 && backMetricsResponse.getSharpnessMetric() < 50) {
-				imageServiceImpl.uploadReplacementImage(instanceId, authToken, frontImage, 1, 0);
+				imageService.uploadReplacementImage(instanceId, authToken, frontImage, 1, 0);
 			}
 		}
 
