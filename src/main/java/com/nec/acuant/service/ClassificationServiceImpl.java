@@ -9,17 +9,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.nec.acuant.constants.URLConstants;
-import com.nec.acuant.to.MetricsResponse;
+import com.nec.acuant.to.ClassificationResponse;
 
-public class MetricsServiceImpl implements MetricsService {
+public class ClassificationServiceImpl implements ClassificationService {
 	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-	public MetricsResponse getImageMetrics(String instanceId, String authToken, int side, int light) {
-		String url = URLConstants.BASE_URL + URLConstants.GET_METRICS;
+	@Override
+	public ClassificationResponse getClassificationData(String instanceId, String authToken) {
+		String url = URLConstants.BASE_URL + URLConstants.GET_CLASSIFICATION;
 		HttpEntity<String> requestEntity = new HttpEntity<>(null, populateHeaderData(authToken));
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<MetricsResponse> response = restTemplate.exchange(getUpdatedUrl(instanceId, url, side, light),
-				HttpMethod.GET, requestEntity, MetricsResponse.class);
+		ResponseEntity<ClassificationResponse> response = restTemplate.exchange(getUpdatedUrl(instanceId, url),
+				HttpMethod.GET, requestEntity, ClassificationResponse.class);
 		LOGGER.debug(response.getBody().toString());
 		return response.getBody();
 	}
@@ -30,11 +31,8 @@ public class MetricsServiceImpl implements MetricsService {
 		return headers;
 	}
 
-	private String getUpdatedUrl(String instanceId, String url, int side, int light) {
-		url.replace("{INSTANCEID}", instanceId);
-		url.replace("{SIDE}", String.valueOf(side));
-		url.replace("{LIGHT}", String.valueOf(light));
-		return url;
+	private String getUpdatedUrl(String instanceId, String url) {
+		return url.replace("{INSTANCEID}", instanceId);
 	}
 
 }

@@ -5,8 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public interface UploadImageService {
-	public void uploadFrontImage(String authToken, MultipartFile frontImage);
 
-	public void uploadBackImage(String authToken, MultipartFile frontImage);
+	public void uploadImage(String instanceId, String authToken, MultipartFile frontImage, int side, int light);
+
+	public void uploadReplacementImage(String instanceId, String authToken, MultipartFile frontImage, int i, int j);
 
 }
